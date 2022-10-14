@@ -9,7 +9,7 @@ import { nanoid } from "nanoid";
 
 export const App = () => {
     const [contacts, setContacts] = useState([]);
-    const [filter, setFilter] = useState('');
+    const [findName, setFindName] = useState('');
 
     useEffect(() => {
         if (!get()) {
@@ -37,14 +37,12 @@ export const App = () => {
     }
 
     const handleFindName = ({ target }) => {
-        setFilter(target.value.toLowerCase());
+        setFindName(target.value.toLowerCase());
     }
 
     const handleDeleteName = (id) => {
         setContacts( contacts.filter(user => user.id !== id) );
     }
-
-    const state = { contacts, filter };
 
     return (
         <div className="data">
@@ -57,7 +55,7 @@ export const App = () => {
 
             <Filter findName={handleFindName} />
 
-            <ContactList data={state} deleteName={handleDeleteName} />
+            <ContactList contacts={contacts} findName={findName} deleteName={handleDeleteName} />
 
         </div>
     )
